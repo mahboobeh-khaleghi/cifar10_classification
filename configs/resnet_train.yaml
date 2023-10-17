@@ -1,0 +1,67 @@
+################ Device ################
+device: "gpu"
+
+
+################ Dataloader ################
+pickles_path_train: [
+  "./datasets/cifar10/data_batch_1",
+  "./datasets/cifar10/data_batch_2",
+  "./datasets/cifar10/data_batch_3",
+  "./datasets/cifar10/data_batch_4",
+]
+pickles_path_eval: [
+  "./datasets/cifar10/data_batch_5",
+]
+preprocessing_method: "normalized"    # "normalied" or "standardized" or "none"
+
+
+################ Torch Dataloader ################
+batch_size: 20
+num_workers: 0
+
+
+################ Model ################
+vectorize_input: false
+model: 
+  input_channel: 3
+  layers_config: [
+    "conv3x3_64",
+    "batchnorm",
+    "relu",
+    "conv3x3_128",
+    "batchnorm",
+    "relu",
+    "maxpool",
+    "res1_64",
+    "res2_64_256",
+    "maxpool",
+    "conv3x3_512",
+    "batchnorm",
+    "relu",
+    "maxpool",
+    "res1_512",
+    "gap",
+    "linear_10"
+  ]
+pretrained_model: "./trained_net.pth" 
+trained_model_saving_path: "./trained_net.pth"
+
+
+################ Loss Function ################
+loss_type: "softmax_cross_entropy"        # "mse" or "softmax_cross_entropy"
+
+
+################ Optimizer ################
+optimizer_type: "sgd"                     # "sgd" or "adam"
+lr: 0.001
+momentum: 0.99
+
+
+################ Training ################
+num_epochs: 20
+
+
+################ Reporting ################
+train_report_path: "./train_report.csv"
+eval_report_path: "./eval_report.csv"
+
